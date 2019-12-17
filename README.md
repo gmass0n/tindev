@@ -1,7 +1,7 @@
 <p align="center">
   <a href="https://github.com/gmass0n/tindev">
     <img src="./.github/logo.svg" alt="Logo">
-  <a href="https://github.com/gmass0n/tindev">
+  </a>
   <h3 align="center">Tindev WEB & Mobile</h3>
   <p align="center">
   Application developed in OmniStack 8.0 similar to Tinder, but for developers.
