@@ -1,7 +1,7 @@
 <p align="center">
   <img src="./.github/logo.png" alt="Logo">
   <h3 align="center">AirCnC WEB & Mobile</h3>
-  <p>
+  <p align="center">
   Application developed in OmniStack 8.0 similar to Tinder, but for developers.
   <br />
   <br />
