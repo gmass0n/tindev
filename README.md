@@ -13,7 +13,6 @@
   <br />
   <br />
  <p align="center">
-  <a href="https://github.com/gmass0n/aircnc">
   <a href="https://github.com/gmass0n/tindev">
     <img src="./.github/web-mobile.png" alt="Main" height="350">
   </a>
