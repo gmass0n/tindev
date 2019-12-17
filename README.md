@@ -3,9 +3,11 @@
   <h3 align="center">AirCnC WEB & Mobile</h3>
   <p>
   Application developed in OmniStack 8.0 similar to Tinder, but for developers.
-<br />
+  <br />
+  <br />
   Profiles will be returned from Github, both on the web and mobile will be possible to LIKE or DISLIKE.
-<br />
+  <br />
+  <br />
   The project contains the technology of Socket.io, which is a library that allows applications to communicate in real time, so if two developers LIKE each other, a message will appear on screen for both.</p>
   <br />
   <br />
