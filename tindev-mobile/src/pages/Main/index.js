@@ -1,5 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react';
+import io from 'socket.io-client';
 import AsyncStorage from '@react-native-community/async-storage';
 import {
   StyleSheet,
@@ -16,10 +16,12 @@ import logo from '../../assets/logo.png';
 import logout from '../../assets/logout.png';
 import dislike from '../../assets/dislike.png';
 import like from '../../assets/like.png';
+import itsamatch from '../../assets/itsamatch.png';
 
 export default function Main({navigation}) {
   const id = navigation.getParam('loggedDev');
   const [devs, setDevs] = useState([]);
+  const [matchDev, setMatchDev] = useState(null);
 
   useEffect(() => {
     async function loadDevs() {
@@ -31,7 +33,17 @@ export default function Main({navigation}) {
     }
 
     loadDevs();
-  }, []);
+  }, [id]);
+
+  useEffect(() => {
+    const socket = io('http://localhost:3333', {
+      query: {user: id},
+    });
+
+    socket.on('match', dev => {
+      setMatchDev(dev);
+    });
+  }, [id]);
 
   async function handleDislike() {
     const [dev, ...rest] = devs;
@@ -109,6 +121,29 @@ export default function Main({navigation}) {
           <Image source={like} />
         </TouchableOpacity>
       </View>
+
+      {matchDev && (
+        <View style={styles.matchContainer}>
+          <Image source={itsamatch} style={styles.matchImage} />
+
+          <Image
+            style={styles.matchAvatar}
+            source={{
+              uri: matchDev.avatar,
+            }}
+          />
+
+          <Text style={styles.matchName}>{matchDev.name}</Text>
+
+          <Text style={styles.matchBio} numberOfLines={5}>
+            {matchDev.bio}
+          </Text>
+
+          <TouchableOpacity onPress={() => setMatchDev(null)}>
+            <Text style={styles.closeMatch}>FECHAR</Text>
+          </TouchableOpacity>
+        </View>
+      )}
     </SafeAreaView>
   );
 }
@@ -134,7 +169,7 @@ const styles = StyleSheet.create({
 
   logout: {
     position: 'absolute',
-    right: 10,
+    right: 30,
     top: 9,
   },
 
@@ -210,5 +245,49 @@ const styles = StyleSheet.create({
       width: 0,
       height: 2,
     },
+  },
+
+  matchContainer: {
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+  },
+
+  matchImage: {
+    height: 60,
+    resizeMode: 'contain',
+  },
+
+  matchAvatar: {
+    width: 160,
+    height: 160,
+    borderRadius: 80,
+    borderWidth: 5,
+    borderColor: '#fff',
+    marginVertical: 30,
+  },
+
+  matchName: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#fff',
+  },
+
+  matchBio: {
+    fontSize: 16,
+    color: 'rgba(255, 255, 255, 0.8)',
+    marginTop: 10,
+    lineHeight: 24,
+    textAlign: 'center',
+    paddingHorizontal: 30,
+  },
+
+  closeMatch: {
+    fontSize: 16,
+    color: 'rgba(255, 255, 255, 0.8)',
+    textAlign: 'center',
+    marginTop: 30,
+    fontWeight: 'bold',
   },
 });
