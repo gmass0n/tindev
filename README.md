@@ -14,6 +14,6 @@
   <br />
  <p align="center">
   <a href="https://github.com/gmass0n/tindev">
-    <img src="./.github/web-mobile.png" alt="Main" height="350">
+    <img src="./.github/web-mobile.jepg" alt="Main" height="350">
   </a>
   </p>
